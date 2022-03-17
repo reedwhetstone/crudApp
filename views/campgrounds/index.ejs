@@ -1,16 +1,42 @@
 <% layout('layouts/boilerplate') %>
+
     <h1>All Campgrounds</h1>
     <div>
         <a href="/campgrounds/new">New Campground</a>
     </div>
-    <ul>
-        <% for (let campground of campgrounds) { %>
-            <li>
-                <a href="/campgrounds/<%= campground._id %>">
-                    <%= campground.title %>
-                </a>
-                <img src="<%=campground.imageUrl%> " alt="image">
-            </li>
-            <%} %>
+    <div>
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <% for (let campground of campgrounds) { %>
+                    <div class="card col-md-5 p-3 m-3 d-flex justify-content-center">
+                        <div class="row">
+                            <div class="col-md-4 d-flex align-items-center ">
+                                <img class='card-img' src="<%=campground.imageUrl%> " alt="image">
+                            </div>
+                            <div class="col-md-8">
 
-    </ul>
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <%= campground.title %>
+                                    </h3>
+                                    <h4 class="h5 card-subtitle mb-2 text-muted">
+                                        <%= campground.location %>
+                                    </h4>
+                                    <p class="card-text">
+                                        <%= campground.description %>
+                                    </p>
+
+                                    <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>">
+                                        More Information
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <%} %>
+
+            </div>
+        </div>
+
+    </div>
