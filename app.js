@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const Campground = require("./models/campground");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const axios = require("axios");
 
 mongoose.connect("mongodb://localhost:27017/yelp-camp");
 
