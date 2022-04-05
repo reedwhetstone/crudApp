@@ -108,21 +108,22 @@
                 <% for(let review of campground.reviews){ %>
                     <div class="card mb-4">
                         <div class="card-body">
-                            <!-- cant get this god forsaken code to work to make the star reviews based on number rating. -->
-                            <!-- test code that works:
-function repeatStringNumTimes(string, times) {
-console.log(string.repeat(times));
-}
-
-repeatStringNumTimes(`a`, review); -->
                             <h5 class="card-title">
-                                Rating: <%= review.rating %>
-                                    <%# function repeatStringNumTimes(string, times) { %>
-                                        <%# return string.repeat(times)}; %>
-                                            <%# repeatStringNumTimes( %>
-                                                <%# <i class="bi-star-fill" style="font-size: 1rem; color: #FD4;"></i>
-                                                    %>
-                                                    <%# , review.rating); %>
+                                <!-- old logic, bad solutions -->
+                                <!-- <i class="bi-star-fill" style="color: #FD4;">
+                                    <%# review.rating %>
+                                </i>
+                                <p class="card-title bi-star-fill" style="color: #FD4;">
+                                    <%#"⭐".repeat(review.rating) %>
+                                </p> -->
+
+                                <!-- GOT IT TO WORK!! -->
+                                <% let str=`<i class="bi-star-fill" style="color: #FD4;"></i>`; %>
+                                    <%function repeatStringNumTimes(str, times) { %>
+                                        <%return str.repeat(times); %>
+                                            <% } %>
+                                                <%- repeatStringNumTimes(str, review.rating); %>
+
                             </h5>
                             <p class="card-text">
                                 Review: <%= review.body %>
