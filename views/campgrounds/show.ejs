@@ -1,46 +1,36 @@
 <% layout('layouts/boilerplate') %>
     <%- include('../partials/ratings_style') %>
         <div class="row">
-            <div class="col-6">
-                <div class="card p-5">
-                    <div class="row">
-
-                        <div class="col">
-                            <img class="card-img" src="<%=campground.imageUrl%> " alt="image">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col card-body">
-                            <div class="d-flex justify-content-between">
-                                <div class="row">
-                                    <div class="col-9">
-                                        <h1 class="card-title">
-                                            <%= campground.title %>
-                                        </h1>
-                                        <h2 class="card-subtitle h3 mb-2 text-muted">
-                                            <%= campground.location %>
-                                        </h2>
-                                    </div>
-                                    <div class="col-3 mb-3 d-flex align-items-center justify-content-end">
-                                        <div class="badge bg-secondary fs-6 text-wrap">Starting at $
-                                            <%=campground.price%>
-                                                per night
-                                        </div>
-                                    </div>
+            <div class=" col-7 offset-1">
+                <img class="card-img show-images" src="<%=campground.imageUrl%> " alt="image">
+                <div class="row">
+                    <div class="col card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <h1 class="card-title">
+                                    <%= campground.title %>
+                                </h1>
+                                <h2 class="card-subtitle h3 mb-2 text-muted">
+                                    <%= campground.location %>
+                                </h2>
+                            </div>
+                            <div class="col-3 mb-3 d-flex align-items-center justify-content-end">
+                                <div class="badge bg-light p-3 text-dark fs-5">$<%=campground.price%> night
                                 </div>
                             </div>
-
-                            <figure>
-                                <blockquote class="blockquote mt-3">
-                                    <p>
-                                        <%= campground.description %>
-                                    </p>
-                                </blockquote>
-                                <figcaption class="blockquote-footer">
-                                    Submitted by: <%= campground.author.username %>
-                                </figcaption>
-                            </figure>
-
+                        </div>
+                        <hr>
+                        <figure>
+                            <blockquote class="blockquote mt-3">
+                                <p>
+                                    <%= campground.description %>
+                                </p>
+                            </blockquote>
+                            <figcaption class="blockquote-footer">
+                                Submitted by: <%= campground.author.username %>
+                            </figcaption>
+                        </figure>
+                        <div class="d-flex justify-content-between">
                             <% if(currentUser && campground.author.equals(currentUser._id)){ %>
                                 <div class=" d-flex justify-content-start align-items-center">
                                     <div>
@@ -53,113 +43,116 @@
                                     </form>
                                 </div>
                                 <% } %>
-                        </div>
-                    </div>
 
+                                    <% if(currentUser){ %>
+                                        <div>
+                                            <button class="btn btn-outline-secondary" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapse"
+                                                aria-expanded="false" aria-controls="collapse">
+                                                Leave a review
+                                            </button>
+                                        </div>
+                        </div>
+                        <div class="collapse" id="collapse">
+                            <div class="my-4">
+                                <form action="/campgrounds/<%= campground._id %>/reviews" type="submit" method="POST"
+                                    class="mb-3 validated-form" novalidate>
+                                    <div class="mb-3">
+                                        <!-- <label class="mx-5 mt-3 form-label" for="body">Review</label> -->
+                                        <div class="mx-5">
+                                            <textarea class="form-control" name="review[body]" id="body" cols="2"
+                                                rows="2" required></textarea>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please enter a review.
+                                            </div>
+                                        </div>
+                                        <div class="mx-5 d-flex justify-content-between">
+                                            <div class="d-flex flex-row-reverse align-items-center stars">
+                                                <input class="star star-5" id="star-5" type="radio"
+                                                    name="review[rating]" value="5" required><label class="star star-5"
+                                                    for="star-5"></label>
+                                                <input class="star star-4" id="star-4" type="radio"
+                                                    name="review[rating]" value="4" required><label class="star star-4"
+                                                    for="star-4"></label>
+                                                <input class="star star-3" id="star-3" type="radio"
+                                                    name="review[rating]" value="3" required><label class="star star-3"
+                                                    for="star-3"></label>
+                                                <input class="star star-2" id="star-2" type="radio"
+                                                    name="review[rating]" value="2" required><label class="star star-2"
+                                                    for="star-2"></label>
+                                                <input class="star star-1" id="star-1" type="radio"
+                                                    name="review[rating]" value="1" required><label class="star star-1"
+                                                    for="star-1"></label>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                                        fill="currentColor" class="bi bi-exclamation-circle"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                        <path
+                                                            d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <!-- validations work but cant get the stupid message to center or get out of the front of the stars. -->
+                                            <div class="d-flex align-items-center">
+                                                <button class="btn btn-primary" type="submit">Submit Review</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <% } %>
+
+                    </div>
                 </div>
             </div>
 
-            <div class="col-6">
-                <% if(currentUser){ %>
-                    <div class="card mb-4">
-                        <h2 class="card-title text-center mt-3">Leave a Review</h2>
-                        <form action="/campgrounds/<%= campground._id %>/reviews" type="submit" method="POST"
-                            class="mb-3 validated-form" novalidate>
-                            <div class="mb-3">
-                                <!-- <label class="mx-5 mt-3 form-label" for="body">Review</label> -->
-                                <div class="mx-5">
-                                    <textarea class="form-control" name="review[body]" id="body" cols="2" rows="2"
-                                        required></textarea>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please enter a review.
-                                    </div>
-                                </div>
-                                <div class="mx-3">
-                                    <!-- <div class="rating">
-                            <input type="radio" name="review[rating]" value="1" id="1"><label for="1" required>☆</label>
-                            <input type="radio" name="review[rating]" value="2" id="2"><label for="2" required>☆</label>
-                            <input type="radio" name="review[rating]" value="3" id="3"><label for="3" required>☆</label>
-                            <input type="radio" name="review[rating]" value="4" id="4"><label for="4" required>☆</label>
-                            <input type="radio" name="review[rating]" value="5" id="5"><label for="5" required>☆</label>
-                        </div> -->
-                                    <div class="container d-flex flex-row-reverse justify-content-center stars">
+            <div class="col-3">
 
-                                        <input class="star star-5" id="star-5" type="radio" name="review[rating]"
-                                            value="5" required><label class="star star-5" for="star-5"></label>
-                                        <input class="star star-4" id="star-4" type="radio" name="review[rating]"
-                                            value="4" required><label class="star star-4" for="star-4"></label>
-                                        <input class="star star-3" id="star-3" type="radio" name="review[rating]"
-                                            value="3" required><label class="star star-3" for="star-3"></label>
-                                        <input class="star star-2" id="star-2" type="radio" name="review[rating]"
-                                            value="2" required><label class="star star-2" for="star-2"></label>
-                                        <input class="star star-1" id="star-1" type="radio" name="review[rating]"
-                                            value="1" required><label class="star star-1" for="star-1"></label>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
-                                                fill="currentColor" class="bi bi-exclamation-circle"
-                                                viewBox="0 0 16 16">
-                                                <path
-                                                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                                <path
-                                                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <!-- validations work but cant get the stupid message to center or get out of the front of the stars. -->
-                                </div>
-                                <div class="mx-5">
-                                    <button class=" btn btn-primary" type="submit">Submit Review</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <% } %>
-                        <% if(campground.reviews.length) {%>
-                            <div class=" mb-4">
-                                <h2 class="card-title text-center mt-3">Reviews</h2>
+                <% if(campground.reviews.length) {%>
+                    <div class=" mb-4">
+                        <% for(let review of campground.reviews){ %>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="bi bi-person-circle text-primary"></i>
+                                        <%= review.author.username %>
+                                    </h5>
+                                    <h6 class="card-subtitle">
+                                        <% let str=`<i class="bi-star-fill" style="color: #FD4;"></i>`; %>
+                                            <%function repeatStringNumTimes(str, times) { %>
+                                                <%return str.repeat(times); %>
+                                                    <% } %>
+                                                        <%- repeatStringNumTimes(str, review.rating); %>
 
-                                <% for(let review of campground.reviews){ %>
-                                    <div class="card mb-4">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                <i class="bi bi-person-circle text-primary"></i>
-                                                <%= review.author.username %>
-                                            </h5>
-                                            <h6 class="card-subtitle">
-                                                <% let str=`<i class="bi-star-fill" style="color: #FD4;"></i>`; %>
-                                                    <%function repeatStringNumTimes(str, times) { %>
-                                                        <%return str.repeat(times); %>
-                                                            <% } %>
-                                                                <%- repeatStringNumTimes(str, review.rating); %>
-
-                                            </h6>
-                                            <p class="card-text">
-                                                <%= review.body %>
-                                            </p>
-                                            <% if(currentUser && review.author.equals(currentUser._id)){ %>
-                                                <form
-                                                    action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE"
-                                                    method="POST">
-                                                    <button class="btn btn-sm btn-outline-danger">
-                                                        Delete Review
-                                                    </button>
-                                                </form>
-                                                <% } %>
-                                        </div>
-                                    </div>
-                                    <% } %>
+                                    </h6>
+                                    <p class="card-text">
+                                        <%= review.body %>
+                                    </p>
+                                    <% if(currentUser && review.author.equals(currentUser._id)){ %>
+                                        <form
+                                            action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE"
+                                            method="POST">
+                                            <button class="btn btn-sm btn-outline-danger">
+                                                Delete Review
+                                            </button>
+                                        </form>
+                                        <% } %>
+                                </div>
                             </div>
                             <% } %>
+                    </div>
+                    <% } %>
             </div>
         </div>
-
-
 
         <div class="col my-5 justify-content-start">
             <a class=" btn btn-dark" href="/campgrounds">Back</a>
