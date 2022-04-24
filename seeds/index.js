@@ -35,7 +35,7 @@ async function seedImg() {
 
 async function seedDB() {
   await Campground.deleteMany({});
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
     const price = Math.floor(Math.random() * (1000 - 100) + 100) / 100;
     const camp = new Campground({
@@ -43,7 +43,11 @@ async function seedDB() {
       images: [
         {
           url: await seedImg(),
-          filename: `${sample(descriptors)} ${sample(places)} ${random1000}`,
+          filename: `${sample(descriptors)} ${random1000}`,
+        },
+        {
+          url: await seedImg(),
+          filename: `${sample(descriptors)} ${random1000}`,
         },
       ],
       title: `${sample(descriptors)} ${sample(places)}`,
