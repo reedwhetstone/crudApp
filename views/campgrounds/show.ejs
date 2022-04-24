@@ -1,35 +1,36 @@
 <% layout('layouts/boilerplate') %>
     <%- include('../partials/ratings_style') %>
         <div class="row">
-            <div class=" col-7 offset-1">
+            <div class="col-7 offset-1">
                 <img class="card-img show-images" src="<%=campground.imageUrl%> " alt="image">
-                <div class="row">
-                    <div class="col card-body">
-                        <div class="row">
-                            <div class="col-9">
-                                <h1 class="card-title">
-                                    <%= campground.title %>
-                                </h1>
-                                <h2 class="card-subtitle h3 mb-2 text-muted">
-                                    <%= campground.location %>
-                                </h2>
-                            </div>
-                            <div class="col-3 mb-3 d-flex align-items-center justify-content-end">
-                                <div class="badge bg-light p-3 text-dark fs-5">$<%=campground.price%> night
-                                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-9">
+                            <h1 class="card-title">
+                                <%= campground.title %>
+                            </h1>
+                            <h2 class="card-subtitle h3 mb-2 text-muted">
+                                <%= campground.location %>
+                            </h2>
+                        </div>
+                        <div class="col-3 mb-3 d-flex align-items-center justify-content-end">
+                            <div class="badge bg-light p-3 text-dark fs-5">$<%=campground.price%> night
                             </div>
                         </div>
-                        <hr>
-                        <figure>
-                            <blockquote class="blockquote mt-3">
-                                <p>
-                                    <%= campground.description %>
-                                </p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                Submitted by: <%= campground.author.username %>
-                            </figcaption>
-                        </figure>
+                    </div>
+                    <hr>
+                    <figure>
+                        <blockquote class="blockquote mt-3">
+                            <p>
+                                <%= campground.description %>
+                            </p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            Submitted by: <%= campground.author.username %>
+                        </figcaption>
+                    </figure>
+
+                    <% if(currentUser){ %>
                         <div class="d-flex justify-content-between">
                             <% if(currentUser && campground.author.equals(currentUser._id)){ %>
                                 <div class=" d-flex justify-content-start align-items-center">
@@ -43,15 +44,13 @@
                                     </form>
                                 </div>
                                 <% } %>
-
-                                    <% if(currentUser){ %>
-                                        <div>
-                                            <button class="btn btn-outline-secondary" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapse"
-                                                aria-expanded="false" aria-controls="collapse">
-                                                Leave a review
-                                            </button>
-                                        </div>
+                                    <div>
+                                        <button class="btn btn-outline-secondary" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false"
+                                            aria-controls="collapse">
+                                            Leave a review
+                                        </button>
+                                    </div>
                         </div>
                         <div class="collapse" id="collapse">
                             <div class="my-4">
@@ -110,10 +109,9 @@
                             </div>
                         </div>
                         <% } %>
-
-                    </div>
                 </div>
             </div>
+
 
             <div class="col-3">
 
@@ -132,7 +130,6 @@
                                                 <%return str.repeat(times); %>
                                                     <% } %>
                                                         <%- repeatStringNumTimes(str, review.rating); %>
-
                                     </h6>
                                     <p class="card-text">
                                         <%= review.body %>
@@ -154,6 +151,8 @@
             </div>
         </div>
 
-        <div class="col my-5 justify-content-start">
-            <a class=" btn btn-dark" href="/campgrounds">Back</a>
+        <div class="row">
+            <div class="col my-5 justify-content-start">
+                <a class=" btn btn-dark" href="/campgrounds">Back</a>
+            </div>
         </div>
