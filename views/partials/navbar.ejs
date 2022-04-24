@@ -16,6 +16,10 @@
                     <a class="nav-link" href="/login">Login</a>
                     <a class="nav-link" href="/register">Register</a>
                     <% } else { %>
+                        <span class="nav-link border-end border-secondary">
+                            <i class="bi bi-person-circle text-primary p-1"></i>
+                            <%= currentUser.username %>
+                        </span>
                         <a class="nav-link" href="/logout">Logout</a>
                         <% } %>
             </div>
