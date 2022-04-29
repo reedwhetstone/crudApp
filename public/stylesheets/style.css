@@ -12,6 +12,37 @@
   object-position: 50% 50%;
 }
 
+.delete-images-select {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  object-position: 50% 50%;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  z-index: -1;
+}
+
+input.imagesDelete {
+  display: none;
+}
+
+input.imagesDelete:checked ~ .check::before {
+  /* border: 3px solid rgba(255, 0, 0, 0.5); */
+  color: rgb(255, 0, 0);
+  transition: all 0.25s;
+}
+
 .panel.active {
   background-color: black;
+}
+
+.check::before {
+  content: '\F5DD';
+  font-family: 'bootstrap-icons';
+  color: rgba(255, 0, 0, 0);
+  font-size: 36px;
+  position: absolute;
+  top: 45%;
+  left: 65%;
 }

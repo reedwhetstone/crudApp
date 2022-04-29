@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.13.3",
     "axios": "^0.26.1",
     "bootstrap-icons": "^1.8.1",
     "cloudinary": "^1.29.1",

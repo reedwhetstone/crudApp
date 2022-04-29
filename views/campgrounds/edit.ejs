@@ -6,7 +6,7 @@
         </h1>
         <div class="col-6 offset-3">
             <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" novalidate
-                class="validated-form">
+                class="validated-form" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label class="form-label" for="title">Title</label>
                     <input class="form-control" type="text" id="title" name="campground[title]"
@@ -56,17 +56,49 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3 row">
                     <div class="form-label" for="image">Images</div>
-                    <input class='form-control' type="file" name="image" id="image" multiple>
-                    <div class="valid-feedback">
-                        Looks good!
+                    <div class="col">
+                        <input class='form-control' type="file" name="image" id="image" multiple>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please upload an image.
+                        </div>
                     </div>
-                    <div class="invalid-feedback">
-                        Please upload an image.
-                    </div>
-                </div>
+                    <% if(campground.images.length> 0){ %>
+                        <div class="col-md-auto">
+                            <p class="">
+                                <button class="btn btn-outline-danger" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseDelete" aria-expanded="false"
+                                    aria-controls="collapseDelete">
+                                    Delete Images
+                                </button>
+                            </p>
+                        </div>
+                        <div class="collapse" id="collapseDelete">
+                            <div class="row">
+                                <% campground.images.forEach(function(img, i){ %>
+                                    <div class="col">
+                                        <!-- <div class="square-wrap">
+                                            <img src="" class="square-images rounded-circle" alt="">
+                                        </div> -->
+                                        <div class="form-check " style="position:relative;">
+                                            <input class="imagesDelete" type="checkbox" value="<%=img.filename%>"
+                                                id="imgDeleteCheck-<%= i %>" name="deleteImages[]">
+                                            <label class="check" for="imgDeleteCheck-<%= i %>">
+                                                <img src="<%= img.thumbnail %>" class="delete-images-select" alt="">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                            </div>
+                        </div>
 
+                        <% } %>
+
+                </div>
                 <div class=" d-flex justify-content-between mb-5">
                     <a class=" btn btn-dark" href="/campgrounds/<%= campground._id %>">Back</a>
                     <button class=" btn btn-success" type="submit">Update
