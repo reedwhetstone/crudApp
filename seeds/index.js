@@ -35,9 +35,9 @@ async function seedImg() {
 
 async function seedDB() {
   await Campground.deleteMany({});
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 50; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
-    const price = Math.floor(Math.random() * (1000 - 100) + 100) / 100;
+    const price = Math.floor(Math.random() * (1000 - 100) + 100) / 10;
     const camp = new Campground({
       author: '6263203d4d2e223283bea1b3',
       images: [
