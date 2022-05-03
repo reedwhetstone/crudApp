@@ -36,11 +36,11 @@ async function seedImg() {
 
 async function seedDB() {
   await Campground.deleteMany({});
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 25; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
     const price = Math.floor(Math.random() * (1000 - 100) + 100) / 10;
     const camp = new Campground({
-      author: '6263203d4d2e223283bea1b3',
+      author: '6271844b9497b88f4ed489ab',
       images: [
         {
           url: await seedImg(),
