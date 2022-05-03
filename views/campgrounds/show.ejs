@@ -136,6 +136,7 @@
 
 
             <div class="col-3">
+                <div id='map' style='width: 100%; height: 300px;' class="mb-4 show"></div>
 
                 <% if(campground.reviews.length) {%>
                     <div class=" mb-4">
@@ -178,3 +179,9 @@
                 <a class=" btn btn-dark" href="/campgrounds">Back</a>
             </div>
         </div>
+        <script>
+            const mapToken='<%-process.env.MAPBOX_TOKEN%>'
+            // CHECK IF THIS IS BROKEN. IF THERE IS A SPACE BETWEEN % and - IT IS BROKEN
+            const campground= <%- JSON.stringify(campground)%>
+        </script>
+        <script src="/javascripts/showMap.js"></script>
